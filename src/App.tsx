@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonRouterOutlet, IonTitle, IonToolbar } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -18,21 +18,60 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
-
+import {alert, list, mailOutline, people, person, settings, star, videocamOutline} from 'ionicons/icons'
 /* Theme variables */
 import './theme/variables.css';
+import DaftarCalon from './pages/daftarCalon';
+import GebetanContextProvider from './data/GebetanContextProvider'
+import DaftarGebetan from './pages/daftarGebetan';
+import Profile from './pages/profile';
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
+   <IonReactRouter>
+    <IonMenu contentId="main">
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>GebetApp</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent>
+        <IonList>
+          <IonMenuToggle>
+            <IonItem button routerLink="/home" >
+              <IonIcon slot="start" icon={people} color="primary"/>
+              <IonLabel>Daftar Calon Gebetan</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/gebetan" style={{marginTop: '15px'}}>
+              <IonIcon slot="start" icon={star} color="primary"/>
+              <IonLabel>Target Gebetan</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/profile" style={{marginTop: '15px'}}>
+              <IonIcon slot="start" icon={person} color="primary"/>
+              <IonLabel>Profil</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+        </IonList>
+      </IonContent>
+    </IonMenu>
+
+    <GebetanContextProvider>
+      <IonRouterOutlet id="main">
         <Route exact path="/home">
-          <Home />
+          <DaftarCalon />
+        </Route>
+        <Route exact path="/gebetan">
+          <DaftarGebetan />
+        </Route>
+        <Route exact path="/profile">
+          <Profile />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
       </IonRouterOutlet>
+      </GebetanContextProvider>
     </IonReactRouter>
   </IonApp>
 );
