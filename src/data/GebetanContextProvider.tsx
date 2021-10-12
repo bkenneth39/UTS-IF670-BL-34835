@@ -1,10 +1,8 @@
-import { doesNotReject } from "assert";
-import { count } from "console";
 import React, {useState} from "react";
 import GebetanContext, {Gebetan} from "./gebetan-context"
 
 const GebetanContextProvider: React.FC = props => {
-    // const [updated, setUpdated] = useState<Gebetan[]>([])
+   
     const [CalonGebetans, setCalonGebetans] = useState<Gebetan[]>([
         {
             id: '1',
